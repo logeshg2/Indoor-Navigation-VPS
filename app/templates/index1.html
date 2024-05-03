@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Location tracking map</title>
+</head>
+<body>
+
+    {% csrf_token %}    
+    
+    <!--Button-->
+    <button class="btn" onClick="cb()" type="submit">Send location</button>
+    <!-- <button onClick="window.location.reload();">Update Map</button> -->
+    
+    <!--Render Map-->
+    <div class = 'map'>
+        {{ m|safe }}
+    </div>
+    <!--<script type="text/javascript" src="{% static 'main.js' %}"></script>-->
+    <script>
+        // let coord;
+        // navigator.geolocation.getCurrentPosition((val => {
+        //     coord = [val.coords.latitude, val.coords.longitude]; }));
+        
+        // // click button callback:
+        // async function cb(){
+        //     //let val = crd.target.innerText
+        //     const csrf = document.querySelector('[name=csrfmiddlewaretoken]').value
+        //     let data = await fetch('',{
+        //         method: 'post',
+        //         headers: {
+        //             'X-Requested-With': 'XMLHttpRequest',
+        //             'Content-Type': 'applicaiton/json',
+        //             'X-CSRFToken': csrf,
+        //             body: JSON.stringify({coord: coord})
+        //         }
+        //     });
+        //     console.log(coord);
+        //     console.log(data);
+        // }
+
+        let coord;
+        navigator.geolocation.getCurrentPosition((val => {
+        coord = [val.coords.latitude, val.coords.longitude];
+}));
+
+// click button callback:
+async function cb(){
+
+    const csrf = document.querySelector('[name=csrfmiddlewaretoken]').value
+    let url = ''; // replace with your Django view URL
+    let data = await fetch(url, {
+        method: 'post',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Content-Type': 'application/json', // corrected typo
+            'X-CSRFToken': csrf
+        },
+        body: JSON.stringify({ 'coord': coord }) // corrected key to be a string
+    }).then(() => window.location.reload());
+    // console.log(coord);
+    // console.log(data);
+}
+
+    </script>
+
+</body>
+</html>
