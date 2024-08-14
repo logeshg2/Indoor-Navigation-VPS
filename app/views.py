@@ -39,7 +39,8 @@ import folium
 
 m = None
 marker = None
-lat = lng =0
+lat = 0
+lng = 0
 @csrf_protect
 def index(request):
     #lat = 0.0
@@ -54,14 +55,14 @@ def index(request):
         except Exception as e:
             print(e)
 
-    m = folium.Map(location=[11.504479, 77.2749852], zoom_start=2) 
-    print(lat)
-    
-    marker = folium.Marker([lat,lng])
-    marker.add_to(m)
-    #print(marker.location)
-    context = {
-        'm': m._repr_html_()
-    }
-    #print(context['m'])
-    return render(request, 'index1.html', context)
+    # m = folium.Map(location=[lat,lng], zoom_start=15) 
+    # #print(lat)
+    # marker = folium.Marker([lat,lng])
+    # marker.add_to(m)
+
+    # #print(marker.location)
+    # context = {
+    #     'm': m._repr_html_()
+    # }
+    # #print(context['m'])
+    return render(request, 'index1.html')
