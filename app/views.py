@@ -32,7 +32,8 @@
 #         'm' : m
 #     }
 #     return render(request, 'index1.html', context)
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 import json
 import folium
@@ -42,7 +43,7 @@ marker = None
 lat = 0
 lng = 0
 @csrf_protect
-def index(request):
+def show_map(request):
     #lat = 0.0
     #lng = 0.0
     global m, marker,lat,lng
@@ -65,4 +66,24 @@ def index(request):
     #     'm': m._repr_html_()
     # }
     # #print(context['m'])
-    return render(request, 'index1.html')
+    return render(request, 'show_map.html')
+
+def index(request):
+    return login_view(request)
+    # return render(request,'login.html')
+
+def login_view(request):
+    return render(request, 'login.html')
+
+def admin_login(request):
+    # Logic for Admin Login (similar to earlier)
+    return render(request, 'admin_login.html')
+
+def student_login(request):
+    # Logic for Student Login (similar to earlier)
+    return render(request, 'student_login.html')
+
+def guest_dashboard(request):
+    # Logic for Guest Access
+    return show_map(request)
+    # return render(request, 'show_map.html') # the map loads as default for guest

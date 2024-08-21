@@ -1,0 +1,62 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+                <option value="admin">Admin</option>
+                <option value="student">Student</option>
+                <option value="guest">Guest</option>
+            </select>
+            
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Role</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="role-selection-container">
+        <h2>Select Your Role</h2>
+        <div class="role-icons">
+            <a href="{% url 'admin_login' %}" class="role-icon">
+                <img src="{% static 'images/admin_icon.png' %}" alt="Admin Icon">
+                <p>Admin</p>
+            </a>
+            <a href="{% url 'student_login' %}" class="role-icon">
+                <img src="{% static 'images/student_icon.jpg' %}" alt="Student Icon">
+                <p>Student</p>
+            </a>
+            <a href="{% url 'guest_dashboard' %}" class="role-icon">
+                <img src="{% static 'images/guest_icon.svg' %}" alt="Guest Icon">
+                <p>Guest</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
